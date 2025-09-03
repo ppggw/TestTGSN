@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1056</width>
+    <height>772</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton_StopCaptureTarget">
+      <property name="text">
+       <string>Запретить захват цели</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QPushButton" name="pushButton_StartPlayingByName">
+      <property name="text">
+       <string>Начать воспроизведение по имени</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="pushButton_RequestLuminanceDetectorSettings">
+      <property name="text">
+       <string>Запросить данные калибровки детектора яркости</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="pushButton_SetLuminanceDetectorSettings">
+      <property name="text">
+       <string>Ввести данные калибровки детектора яркости</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QPushButton" name="pushButton_StartPlayingByIndex">
+      <property name="text">
+       <string>Начать воспроизведение по индексу</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QPushButton" name="pushButton_RequesListOfFiles">
+      <property name="text">
+       <string>Запросить список файлов</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QPushButton" name="pushButton_StartWriting">
+      <property name="text">
+       <string>Начать запись видеоданных и температуры в файл</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QPushButton" name="pushButton_StopPlayingFiles">
+      <property name="text">
+       <string>Остановить воспроизведение файла</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QPushButton" name="pushButton_SetTime">
+      <property name="text">
+       <string>Задать время</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="pushButton_StopWriting">
+      <property name="text">
+       <string>Остановить запись видеоданных и температуры в файл</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButton_StartCaptureTarget">
+      <property name="text">
+       <string>Разрешить захват цели</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QPushButton" name="pushButton_manuallyRebootTGSN">
+      <property name="text">
+       <string>Принудительная перезагрузка</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
