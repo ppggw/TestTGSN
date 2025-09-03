@@ -22,7 +22,7 @@ struct ByfferForReceive{
 
     ByfferForReceive(int TrueSizeOfMessage_):TrueSizeOfMessage(TrueSizeOfMessage_){ba.resize(0);}
 
-    bool ReadComplete(){ return ba.size() == TrueSizeOfMessage; }
+    bool ReadComplete(){ return ba.size() >= TrueSizeOfMessage; }
 };
 
 
@@ -34,7 +34,7 @@ private:
     QSerialPort *serial;
     uint16_t CRC16_Table[256];
 
-    ByfferForReceive message{9};
+    ByfferForReceive message{48};
 
     void OpenSerialPort();
     void MakeCRC16_Table();

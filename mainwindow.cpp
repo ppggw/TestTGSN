@@ -197,8 +197,26 @@ void MainWindow::on_pushButton_StartPlayingByName_clicked()
 
 void MainWindow::on_pushButton_StartPlayingByIndex_clicked()
 {
+    //если я правильно понял формирование этой посылки
     uint16_t CommandWord = 16;
-    uint16_t ControlSum = 0;
+
+    QByteArray message;
+    QDataStream stream(&message, QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::LittleEndian);
+    stream << CommandWord;
+
+    QString name = "1";
+    QByteArray ByteName = name.toUtf8();
+    std::reverse(ByteName.begin(), ByteName.end());
+    uint16_t ControlSum = ComputeCRC16_ControlSum(ByteName);
+
+    stream << ControlSum;
+    for(char& byte : ByteName){
+        stream << (uchar)byte;
+    }
+    stream << (uchar)0x00;
+
+    serial->write(message);
 }
 
 
@@ -288,35 +306,34 @@ void MainWindow::ReadDataFromSlave(){
 
     if(!message.ReadComplete()){
        message.ba += buf;
-       qDebug() << message.ba.toHex();
     }
 
     if(message.ReadComplete()){
         qDebug() << message.ba.toHex();
 
-        QDataStream stream(message.ba);
-        stream.setByteOrder(QDataStream::LittleEndian);
+//        QDataStream stream(message.ba);
+//        stream.setByteOrder(QDataStream::LittleEndian);
 
-        uint8_t ByteOfStates, ByteOfCommandPurpose, buf;
-        uint16_t NumOfVideos, ControlSum;
-        stream >> ByteOfStates >> ByteOfCommandPurpose >> NumOfVideos;
+//        uint8_t ByteOfStates, ByteOfCommandPurpose, buf;
+//        uint16_t NumOfVideos, ControlSum;
+//        stream >> ByteOfStates >> ByteOfCommandPurpose >> NumOfVideos;
 
-        QString name;
-        QByteArray ByteName{};
-        for(int i = 0; i != NumOfVideos; i++){
-            for(int j = 0; j != 5; j++){
-                stream >> buf;
-                ByteName += (uchar)buf;
-            }
-            qDebug() << ByteName.toHex();
-            std::reverse(ByteName.begin(), ByteName.end());
-            name = QString::fromUtf8(ByteName);
-            qDebug() << name;
-            if(i != (NumOfVideos-1)){ stream >> buf; }
-            ByteName.clear();
-        }
-        stream >> ControlSum;
-        qDebug() << ControlSum;
+//        QString name;
+//        QByteArray ByteName{};
+//        for(int i = 0; i != NumOfVideos; i++){
+//            for(int j = 0; j != 5; j++){
+//                stream >> buf;
+//                ByteName += (uchar)buf;
+//            }
+//            qDebug() << ByteName.toHex();
+//            std::reverse(ByteName.begin(), ByteName.end());
+//            name = QString::fromUtf8(ByteName);
+//            qDebug() << name;
+//            if(i != (NumOfVideos-1)){ stream >> buf; }
+//            ByteName.clear();
+//        }
+//        stream >> ControlSum;
+//        qDebug() << ControlSum;
 
 //        uint16_t buf;
 //        int counter = 0;
@@ -326,7 +343,8 @@ void MainWindow::ReadDataFromSlave(){
 //            counter++;
 //        }
 //        qDebug() << "\n";
-//        message.ba.clear();
+
+        message.ba.clear();
     }
 }
 
